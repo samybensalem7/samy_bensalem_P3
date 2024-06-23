@@ -84,6 +84,31 @@ h2{
 	font-size: 30px;
 	color: #1D6154
 }
+
+.filters-button{
+	display: flex;
+    justify-content: center;
+    margin-top: 4%;
+    margin-bottom: 4%;
+}
+
+.filter-button{
+    font-family: Syne;
+	color: #1D6154;
+    margin-right: 2%;
+    border-radius: 38px;
+    padding: 10px 9px;
+    background-color: white;
+    border: 2px solid #1D6154;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.filter-button:active {
+	background-color:  #1D6154;
+	color: white;
+}
+
 nav ul {
 	display: flex;
 	align-items: center;
