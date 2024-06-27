@@ -105,7 +105,7 @@ getCategories();
 
 const filterArea = document.querySelector(".filterArea")
 
-createFilterButton("Tous")
+createFilterButton("Tous");
 
 function createFilterButton(categorie){
     const filterButton = document.createElement("button");
@@ -118,6 +118,7 @@ function createFilterButton(categorie){
 
     filterButton.addEventListener("click", () => {
         filterWorks(categorie, data)
+        setActiveCategorie(filterButton);
     })
 }
 
@@ -134,10 +135,20 @@ function filterWorks(categorie, data){
 
 }
 
-/*    let monBouton = document.getElementById("monBouton");
-monBouton.addEventListener("click", function () {
-    console.log("Vous avez cliqué sur le bouton")
-});*/
+
+function setActiveCategorie(activeButton){
+    const filterButtons = document.querySelectorAll(".filterArea .filter-button");
+    // on recupère tout les boutons de la section filterArea pour leur supprimé la valeur active
+    filterButtons.forEach(button => {
+        button.classList.remove("active");
+    })
+    activeButton.classList.add("active");
+
+
+}
+
+
+
 
 
 

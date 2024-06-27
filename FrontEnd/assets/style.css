@@ -104,7 +104,7 @@ h2{
 	padding-right: 15px;
 }
 
-.filter-button:active {
+.filter-button.active {
 	background-color:  #1D6154;
 	color: white;
 }
