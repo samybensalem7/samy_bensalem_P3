@@ -112,6 +112,9 @@ function createFilterButton(categorie){
     const textButton = document.createElement("span"); 
     textButton.textContent = categorie;
     filterButton.classList.add("filter-button");
+    if(categorie === "Tous"){
+        filterButton.classList.add("active");
+    }
     textButton.classList.add("textButton");
     filterArea.appendChild(filterButton);
     filterButton.appendChild(textButton);
@@ -121,7 +124,6 @@ function createFilterButton(categorie){
         setActiveCategorie(filterButton);
     })
 }
-
 
 
 function filterWorks(categorie, data){
