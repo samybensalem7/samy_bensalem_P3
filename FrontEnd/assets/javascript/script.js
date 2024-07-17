@@ -1,8 +1,9 @@
 console.log("samy")
 
+
 const api = "http://localhost:5678/api";
 
-//variable globale (grand portéé)
+//variable globale (grand portée)
 let data;
 
 // on récupère les données des works 
@@ -17,26 +18,48 @@ async function start(){
 function displayWorks(data){
 
     let gallery = document.querySelector(".gallery");
+    let modalGallery = document.querySelector(".modal-gallery");
 
     gallery.innerHTML = "";
+    modalGallery.innerHTML= "";
 
     for (let i in data){
         let work = data[i];
 
+       
         let figcaption = document.createElement("figcaption");
-            figcaption.textContent = work.title;
+        figcaption.textContent = work.title;
 
-              let figure = document.createElement("figure");
-              let images = document.createElement("img");
+
+          let figure = document.createElement("figure");
+          let images = document.createElement("img");
+          
+          let figureModal = document.createElement("figure");
+          let imageModal = document.createElement("img");
+          let corbeille = document.createElement("button");
+          let binIcon = document.createElement("i");
+
+          
+          binIcon.className = 'fa-solid fa-trash-can';
+         
+          images.src = work.imageUrl    
+          imageModal.src = work.imageUrl;
+
+
+          figure.appendChild(images);
+          figure.appendChild(figcaption);
+          gallery.appendChild(figure);
+
+
+        
+          figureModal.appendChild(imageModal);
+          figureModal.appendChild(corbeille);
+          corbeille.appendChild(binIcon);
+          modalGallery.appendChild(figureModal);
+
               
-              images.src = work.imageUrl;
-
-              figure.appendChild(images);
-              figure.appendChild(figcaption);
-              gallery.appendChild(figure);
 
 }
-
 
 }
 
@@ -146,8 +169,70 @@ function setActiveCategorie(activeButton){
     })
     activeButton.classList.add("active");
 
-
 }
+
+
+
+
+/*
+function stayConnected(){
+    const token = localStorage.getItem("accessToken")
+    if(token !== null){
+        editionMode.style.display = 'block';
+        modificationButton.style.display = 'block';
+        console.log("ca marche")
+    }
+    else {
+        console.log("bah ca marche pas ")
+        /* ne rien faire*/
+ //   }
+//}
+
+const editionMode = document.getElementById("edition-mode");
+const modificationButton = document.querySelector(".modification-btn");
+
+let logout = document.getElementById("login");
+
+
+// 173
+//document.addEventListener('DOMContentLoaded', function() {
+    const token = localStorage.getItem("accesToken");
+    console.log(token);
+    if (token !== null) {
+        editionMode.style.display = 'flex'; 
+        modificationButton.style.display = 'block'; 
+        console.log("C'est bon, le token est présent.");
+        logout.textContent= "logout";
+    } else {
+        console.log("Pas de token trouvé.");
+        
+    }
+//});
+
+
+logout.addEventListener('click', function(){
+    localStorage.removeItem('accesToken');
+   /* location.reload();*/
+})
+
+
+// ouverture et fermeture de la modale 
+const modal = document.querySelector(".modal");
+const editButton = document.querySelector(".modification-btn");
+const closeButton = document.querySelector(".close-button")
+
+  editButton.addEventListener('click', function() {
+    modal.classList.remove('hidden');
+  });
+
+  closeButton.addEventListener('click', function(){
+  modal.classList.add("hidden") });
+
+
+
+
+
+
 
 
 

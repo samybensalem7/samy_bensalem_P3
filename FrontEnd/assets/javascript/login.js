@@ -14,6 +14,7 @@ form.addEventListener("submit", async function (event)
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
+
     let errorMessage = document.getElementById("error-message");
 
 
@@ -105,4 +106,6 @@ function verifierMotDePasse(balise){
     
 
 }*/
+
+
 
