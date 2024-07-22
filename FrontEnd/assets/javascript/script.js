@@ -7,7 +7,7 @@ const api = "http://localhost:5678/api";
 let data;
 
 // on récupère les données des works 
-async function start(){
+async function start() {
     const response = await fetch(api + "/works");
     data = await response.json();
     displayWorks(data);
@@ -15,51 +15,54 @@ async function start(){
 
 }
 
-function displayWorks(data){
+function displayWorks(data) {
 
     let gallery = document.querySelector(".gallery");
     let modalGallery = document.querySelector(".modal-gallery");
 
     gallery.innerHTML = "";
-    modalGallery.innerHTML= "";
+    modalGallery.innerHTML = "";
 
-    for (let i in data){
+    for (let i in data) {
         let work = data[i];
 
-       
+
         let figcaption = document.createElement("figcaption");
         figcaption.textContent = work.title;
 
 
-          let figure = document.createElement("figure");
-          let images = document.createElement("img");
-          
-          let figureModal = document.createElement("figure");
-          let imageModal = document.createElement("img");
-          let corbeille = document.createElement("button");
-          let binIcon = document.createElement("i");
+        let figure = document.createElement("figure");
+        let images = document.createElement("img");
 
-          
-          binIcon.className = 'fa-solid fa-trash-can';
-         
-          images.src = work.imageUrl    
-          imageModal.src = work.imageUrl;
-
-
-          figure.appendChild(images);
-          figure.appendChild(figcaption);
-          gallery.appendChild(figure);
-
+        let figureModal = document.createElement("figure");
+        let imageModal = document.createElement("img");
+        let corbeille = document.createElement("button");
+        let binIcon = document.createElement("i");
 
         
-          figureModal.appendChild(imageModal);
-          figureModal.appendChild(corbeille);
-          corbeille.appendChild(binIcon);
-          modalGallery.appendChild(figureModal);
 
-              
+        corbeille.className = 'btn-bin';
+        binIcon.className = 'fa-solid fa-trash-can';
+        figureModal.className = 'figure-modal-style';
 
-}
+        images.src = work.imageUrl
+        imageModal.src = work.imageUrl;
+
+
+        figure.appendChild(images);
+        figure.appendChild(figcaption);
+        gallery.appendChild(figure);
+
+
+
+        figureModal.appendChild(imageModal);
+        figureModal.appendChild(corbeille);
+        corbeille.appendChild(binIcon);
+        modalGallery.appendChild(figureModal);
+
+
+
+    }
 
 }
 
@@ -68,11 +71,11 @@ start();
 // récupere les works //
 
 //async function getWorks() {
-    /*fetch(api + "/works")
-        .then(function (response) {
-            return response.json();  
-        })
-        .then(function (data) { */
+/*fetch(api + "/works")
+    .then(function (response) {
+        return response.json();  
+    })
+    .then(function (data) { */
 /*
         const response = await fetch(api + "/works");
         data = await response.json();
@@ -105,23 +108,23 @@ start();
 
 getWorks();*/
 
-async function getCategories(){
-   const response = await fetch("http://localhost:5678/api/categories");
-   dataCategories = await response.json();
-   
+async function getCategories() {
+    const response = await fetch("http://localhost:5678/api/categories");
+    dataCategories = await response.json();
 
-   for(let i in dataCategories){
-    let categorie = dataCategories[i];
-    console.log(categorie.name);
-    console.log(categorie.id);
-    console.log(categorie); 
+
+    for (let i in dataCategories) {
+        let categorie = dataCategories[i];
+        console.log(categorie.name);
+        console.log(categorie.id);
+        console.log(categorie);
     }
 
 
-    
+
     dataCategories.forEach(category => createFilterButton(category.name));
 
-    
+
 }
 
 getCategories();
@@ -130,12 +133,12 @@ const filterArea = document.querySelector(".filterArea")
 
 createFilterButton("Tous");
 
-function createFilterButton(categorie){
+function createFilterButton(categorie) {
     const filterButton = document.createElement("button");
-    const textButton = document.createElement("span"); 
+    const textButton = document.createElement("span");
     textButton.textContent = categorie;
     filterButton.classList.add("filter-button");
-    if(categorie === "Tous"){
+    if (categorie === "Tous") {
         filterButton.classList.add("active");
     }
     textButton.classList.add("textButton");
@@ -149,8 +152,8 @@ function createFilterButton(categorie){
 }
 
 
-function filterWorks(categorie, data){
-    if( categorie === "Tous"){
+function filterWorks(categorie, data) {
+    if (categorie === "Tous") {
         displayWorks(data)
     }
     else {
@@ -161,7 +164,7 @@ function filterWorks(categorie, data){
 }
 
 
-function setActiveCategorie(activeButton){
+function setActiveCategorie(activeButton) {
     const filterButtons = document.querySelectorAll(".filterArea .filter-button");
     // on recupère tout les boutons de la section filterArea pour leur supprimé la valeur active
     filterButtons.forEach(button => {
@@ -185,7 +188,7 @@ function stayConnected(){
     else {
         console.log("bah ca marche pas ")
         /* ne rien faire*/
- //   }
+//   }
 //}
 
 const editionMode = document.getElementById("edition-mode");
@@ -196,37 +199,65 @@ let logout = document.getElementById("login");
 
 // 173
 //document.addEventListener('DOMContentLoaded', function() {
-    const token = localStorage.getItem("accesToken");
-    console.log(token);
-    if (token !== null) {
-        editionMode.style.display = 'flex'; 
-        modificationButton.style.display = 'block'; 
-        console.log("C'est bon, le token est présent.");
-        logout.textContent= "logout";
-    } else {
-        console.log("Pas de token trouvé.");
-        
-    }
+const token = localStorage.getItem("accesToken");
+console.log(token);
+if (token !== null) {
+    editionMode.style.display = 'flex';
+    modificationButton.style.display = 'block';
+    console.log("C'est bon, le token est présent.");
+    logout.textContent = "logout";
+} else {
+    console.log("Pas de token trouvé.");
+
+}
 //});
 
 
-logout.addEventListener('click', function(){
+logout.addEventListener('click', function () {
     localStorage.removeItem('accesToken');
-   /* location.reload();*/
+    /* location.reload();*/
 })
 
 
 // ouverture et fermeture de la modale 
 const modal = document.querySelector(".modal");
 const editButton = document.querySelector(".modification-btn");
-const closeButton = document.querySelector(".close-button")
+const closeButton = document.querySelector(".close-button");
+const addPhotoBtn = document.getElementById("add-photo-button");
+const modalAjout = document.getElementById("modale-ajout");
+const modalSuppression = document.getElementById("modale-suppression");
+const closeBtnAjout = document.querySelector(".close-button-ajout");
+const backButton = document.querySelector(".back-btn");
 
-  editButton.addEventListener('click', function() {
-    modal.classList.remove('hidden');
-  });
+editButton.addEventListener('click', function () {
+    modal.classList.remove("hidden");
+});
 
-  closeButton.addEventListener('click', function(){
-  modal.classList.add("hidden") });
+closeButton.addEventListener('click', function () {
+    modal.classList.add("hidden");
+    modalAjout.classList.add("hidden");
+});
+
+addPhotoBtn.addEventListener('click', function () {
+    modalSuppression.classList.add("hidden");
+    modalAjout.classList.remove("hidden");
+
+    closeBtnAjout.addEventListener('click', function () {
+        modal.classList.add('hidden');
+    })
+
+    backButton.addEventListener('click', function () {
+        modalAjout.classList.add("hidden");
+        modalSuppression.classList.remove("hidden");
+    })
+
+
+
+})
+
+
+
+
 
 
 
