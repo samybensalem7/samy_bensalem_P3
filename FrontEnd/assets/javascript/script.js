@@ -15,6 +15,7 @@ async function start() {
 
 }
 
+
 function displayWorks(data) {
 
     let gallery = document.querySelector(".gallery");
@@ -39,6 +40,29 @@ function displayWorks(data) {
         let corbeille = document.createElement("button");
         let binIcon = document.createElement("i");
 
+
+        
+        corbeille.addEventListener('click', async function(event) {
+            event.preventDefault();
+
+            let token = localStorage.getItem("accesToken"); 
+            let workID = work.id;
+        
+            try {
+                const response = await fetch(`http://localhost:5678/api/works/${workID}`, {
+                    method: 'DELETE',
+                    headers: {Authorization: "Bearer " + token }
+                });
+        
+                if (response.ok) {
+                    console.log("L'élément a été supprimé avec succès.");
+                } else {
+                    console.log("Problème lors de la suppression de l'élément.");
+                }
+            } catch (erreur) {
+                console.log("Erreur lors de la requête DELETE:", erreur);
+            }
+        });
         
 
         corbeille.className = 'btn-bin';
