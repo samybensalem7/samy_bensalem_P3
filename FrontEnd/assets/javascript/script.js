@@ -51,11 +51,15 @@ function displayWorks(data) {
             try {
                 const response = await fetch(`http://localhost:5678/api/works/${workID}`, {
                     method: 'DELETE',
-                    headers: {Authorization: "Bearer " + token }
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Accept': '*/*'  // Spécifie que n'importe quel type de réponse est accepté
+                    }
                 });
         
                 if (response.ok) {
                     console.log("L'élément a été supprimé avec succès.");
+                    location.reload();
                 } else {
                     console.log("Problème lors de la suppression de l'élément.");
                 }
