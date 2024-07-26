@@ -487,6 +487,7 @@ footer nav ul {
  .fa-image{
 	color :#D1D8DC;
 	font-size: 61px;
+	margin-left: 52px;
  }
 
  .add-file{
@@ -500,6 +501,7 @@ footer nav ul {
     margin-top: 10px;
     margin-bottom: 7px;
 	color: #5A7A8C;
+	/*z-index: 1;*/
  }
 
  .form-add-picture{
@@ -560,4 +562,41 @@ footer nav ul {
     margin-top: 11px;
 
 }
+
+#img-work{
+	margin-left: 25px;
+	background-color: #5A7A8C;
+    margin-top: -35px;
+    width: 115px;
+}
+
+.format{
+	padding-top: 13px;
+    margin-left: 18px;
+}
+
+
+#file-upload-button{
+	background-color: #5A7A8C;
+}
  
+#error-img{
+	color: red;
+    padding-top: 5px;
+    text-align: center;
+}
+
+#upload-image{
+	background-color: blue;
+	z-index: 2;
+}
+
+.photo-preview{
+	width: 129px;
+	height: 169px;
+}
+
+#photo-uploaded-container{
+	display: flex;
+	flex-direction: column;
+}

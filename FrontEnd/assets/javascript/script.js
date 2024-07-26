@@ -59,7 +59,7 @@ function displayWorks(data) {
         
                 if (response.ok) {
                     console.log("L'élément a été supprimé avec succès.");
-                    location.reload();
+                    start();
                 } else {
                     console.log("Problème lors de la suppression de l'élément.");
                 }
@@ -283,9 +283,91 @@ addPhotoBtn.addEventListener('click', function () {
 
 })
 
+const photoCategorie = document.getElementById("photo-category");
+const titre = document.getElementById("titre");
+
+const validePicture = document.querySelector(".validate-picture");
+const errorImg= document.getElementById("error-img");
+const addfile = document.querySelector(".add-file");
+const imgWork = document.getElementById("img-work");
 
 
+console.log("test");
+// ne fonctionne pas encore 
+    addfile.addEventListener("click",()=>{
+        
+        imgWork.click();
+    })
 
+const photoUploadedContainer =document.getElementById("photo-uploaded-container") ;
+
+function displayPreview(){
+imgWork.addEventListener("change", function () {
+    const file = this.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.addEventListener("load", function () {
+            photoUploadedContainer.innerHTML = `<img src="${this.result}" alt="photo Preview" class="photo-preview">`
+        });
+        
+        reader.readAsDataURL(file);
+    };
+});
+
+}
+
+displayPreview();
+
+function addProject(){
+
+    console.log("bonjour");
+    validePicture.addEventListener("click", async function(event){
+        event.preventDefault();
+
+        const formData = new FormData();
+
+    formData.append("title", titre.value);
+    formData.append("category",photoCategorie.value);
+    formData.append("image",imgWork.files[0]);
+   
+        if(!titre.value || !photoCategorie.value || imgWork.files[0] === null){
+            errorImg.classList.remove("hidden");
+        }
+        else{
+            try {
+    
+                const response = await fetch(api + "/works", {
+                    method: "POST",
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Accept': 'application/json'
+                    },
+                    body: formData  
+                });
+            
+                if(response.ok){
+                    console.log("projet ajouté avec succès");
+                    start();
+                }
+            
+                else {
+                    console.log("un problème est survenu lors de l'envoie du projet");
+                }
+            }
+                catch(erreur){
+                    console.log(erreur);
+                        errorMessage.textContent= " une erreur est survenu veuillez réessayez plus tard"
+            
+                }
+
+        }
+    }
+
+
+)}
+
+
+addProject();
 
 
 

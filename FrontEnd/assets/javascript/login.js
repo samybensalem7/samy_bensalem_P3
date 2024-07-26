@@ -48,7 +48,6 @@ form.addEventListener("submit", async function (event)
             errorMessage.textContent="Email ou mot de passe incorrect"
         }
 
-
         }
         catch(erreur) {
             console.log(erreur);

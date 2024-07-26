@@ -96,9 +96,12 @@
 		</div>
 		<h2>Ajout Photo</h2>
 		<div class="add-picture">
+			<div id="photo-uploaded-container">
 			<i class="fa-regular fa-image"></i>	
 			<button class="add-file"> + Ajouter photo </button>
-			<p> jpg, png : 4mo max</p>
+			<input class="hidden" type="file" id="img-work" name="work" accept="image/png, image/jpeg" />
+			<p class="format"> jpg, png : 4mo max</p>
+			</div>
 		</div>
 
 		<form class="form-add-picture">
@@ -111,6 +114,7 @@
 						<option value="2">Appartements</option>
 						<option value="3">Hôtels & restaurants</option>
 					</select>
+			<p class="hidden" id="error-img"> un des champs est mal renseigné, veuillez réessayer</p>		
 		
 		<hr>
 			<input class="validate-picture" type="submit" value="valider">
