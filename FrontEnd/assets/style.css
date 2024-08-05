@@ -306,6 +306,11 @@ footer nav ul {
 	color: black;
 }
 
+.links{
+	text-decoration: none;
+	color: black;
+}
+
 .modification{
 	display: flex;
 	justify-content: center;	
@@ -535,7 +540,7 @@ footer nav ul {
 }
 	
 .form-add-picture input[type="submit"]{
-	margin-left: 154px;
+	margin-left: 164px;
     width: 280px;
     height: 42px;
 }
@@ -599,4 +604,13 @@ footer nav ul {
 #photo-uploaded-container{
 	display: flex;
 	flex-direction: column;
+}
+
+.filled{
+	background-color: #1D6154;;
+}
+
+img{
+	max-width: 100%;
+	max-height: 100%;
 }

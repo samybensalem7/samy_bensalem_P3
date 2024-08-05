@@ -23,9 +23,9 @@
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
-			<li>projets</li>
-			<li>contact</li>
-			<li><a href="login.html" id="login">login</a></li>
+			<li><a class="links" href="#projects">projets</a></li>
+			<li><a class="links" href="#contact">contact</a></li>
+			<li><a class="links" href="login.html" id="login">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -45,7 +45,7 @@
 	<section id="portfolio">
 
 		<div class="modification">
-		<h2>Mes Projets</h2>
+		<h2 id="projects">Mes Projets</h2>
 
 		<button class="modification-btn"><i class="fa-regular fa-pen-to-square"></i> modifier </button>
 		
@@ -54,7 +54,7 @@
 		<div class="filterArea">
 		</div>
 
-		<div class="gallery">
+		<div  class="gallery">
 		</div>
 	</section>
 	<section id="contact">
@@ -110,9 +110,6 @@
 			<label for="photo-category">Catégorie</label>
 					<select type="text" id="photo-category">
 						<option value=""></option>
-						<option value="1">Objets</option>
-						<option value="2">Appartements</option>
-						<option value="3">Hôtels & restaurants</option>
 					</select>
 			<p class="hidden" id="error-img"> un des champs est mal renseigné, veuillez réessayer</p>		
 		
