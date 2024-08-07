@@ -240,6 +240,7 @@ const backButton = document.querySelector(".back-btn");
 editButton.addEventListener("click", function () {
   modal.classList.remove("hidden");
   modalSuppression.classList.remove("hidden");
+  modalAjout.classList.add("hidden");
 });
 
 closeButton.addEventListener("click", function () {
