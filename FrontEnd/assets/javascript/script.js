@@ -239,6 +239,7 @@ const backButton = document.querySelector(".back-btn");
 
 editButton.addEventListener("click", function () {
   modal.classList.remove("hidden");
+  modalSuppression.classList.remove("hidden");
 });
 
 closeButton.addEventListener("click", function () {
@@ -298,7 +299,7 @@ displayPreview();
 const validatePicture = document.querySelector(".validate-picture");
 
 function addProject() {
-  console.log(titre.value, photoCategorie.value, imgWork.file[0]);
+  //console.log(titre.value, photoCategorie.value, imgWork.file[0]);
 
   if (titre.value && photoCategorie.value && imgWork.files[0] !== null) {
     validatePicture.classList.add("filled");
@@ -333,6 +334,7 @@ function addProject() {
           console.log("projet ajouté avec succès");
           modalAjout.classList.add("hidden");
           modal.classList.add("hidden");
+          console.log("ici");
 
           start();
         } else {
