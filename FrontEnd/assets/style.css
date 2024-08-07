@@ -516,7 +516,7 @@ footer nav ul {
 
  .form-add-picture .validate-picture{
 	border: none;
-	background-color: gray;
+	background-color: #1D6154;
  }
 
  .form-add-picture input{
@@ -606,11 +606,11 @@ footer nav ul {
 	flex-direction: column;
 }
 
-.filled{
-	background-color: #1D6154;;
-}
-
 img{
 	max-width: 100%;
 	max-height: 100%;
+}
+
+.validate-picture:disabled {
+	background-color: gray; 
 }

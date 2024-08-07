@@ -298,13 +298,26 @@ displayPreview();
 
 const validatePicture = document.querySelector(".validate-picture");
 
+photoCategorie.addEventListener("change", function(event){
+  
+  if (titre.value && photoCategorie.value && imgWork.files.length > 0) {
+    validatePicture.disabled = false;
+} else {
+    validatePicture.disabled = true;
+}
+})
+
+titre.addEventListener("change", function(event){
+  
+  if (titre.value && photoCategorie.value && imgWork.files.length > 0) {
+    validatePicture.disabled = false;
+} else {
+    validatePicture.disabled = true;
+}
+})
+
 function addProject() {
-  //console.log(titre.value, photoCategorie.value, imgWork.file[0]);
-
-  if (titre.value && photoCategorie.value && imgWork.files[0] !== null) {
-    validatePicture.classList.add("filled");
-  }
-
+ 
   console.log("bonjour");
   validePicture.addEventListener("click", async function (event) {
     event.preventDefault();
