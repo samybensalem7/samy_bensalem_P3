@@ -1,6 +1,5 @@
 const api = "http://localhost:5678/api";
 
-
 let data;
 
 // on récupère les données des works
@@ -147,14 +146,14 @@ const modificationButton = document.querySelector(".modification-btn");
 
 let logout = document.getElementById("login");
 // verification du token pour savoir si l'admin est encore connecté
-  const token = localStorage.getItem("accesToken");
-  if (token !== null) {
-    editionMode.style.display = "flex";
-    modificationButton.style.display = "block";
-    logout.textContent = "logout";
-  } else {
-    console.log("aucun token trouvé.");
-  }
+const token = localStorage.getItem("accesToken");
+if (token !== null) {
+  editionMode.style.display = "flex";
+  modificationButton.style.display = "block";
+  logout.textContent = "logout";
+} else {
+  console.log("aucun token trouvé.");
+}
 //suppression du token en cas de deconnexion
 logout.addEventListener("click", function () {
   localStorage.removeItem("accesToken");
