@@ -5,7 +5,6 @@ const form = document.querySelector("form");
 function login() {
   form.addEventListener("submit", async function (event) {
     event.preventDefault();
-    console.log("pas de rechargement de la page");
 
     // récupération des valeurs des champs
     const email = document.getElementById("email").value;
@@ -33,58 +32,14 @@ function login() {
         const token = data.token;
         localStorage.setItem("accesToken", token);
         location.href = "index.html";
-        console.log("t'as reussi");
       } else {
-        //const errorData = (await response).json();
-        console.log("connexion échoué");
         errorMessage.textContent = "Email ou mot de passe incorrect";
       }
     } catch (erreur) {
-      console.log(erreur);
       errorMessage.textContent =
         " une erreur est survenu veuillez réessayez plus tard";
     }
-
-    // debuggage
-    console.log(email);
-    console.log(password);
-
-    /*  verifierChamp(email);
-    verifierChamp(password);
-
-    verifierEmail(email);
-    verifierMotDePasse(password);*/
   });
 }
 
 login();
-
-/* 
-function verifierChamp (balise) {
-    if(balise === ""){
-        console.log("le champ est vide")
-    }
-
-}
-
-function verifierEmail(balise){
-    let emailRegExp = new RegExp("");
-    if(emailRegExp.test(balise)){
-        console.log("l'email est conforme");
-    }
-    else{
-        console.log("l'email n'est pas conforme");
-    }
-}
-
-function verifierMotDePasse(balise){
-    let mdpRegExp = new RegExp("/^.{6,}$/");
-    if(mdpRegExp.test(balise)){
-        console.log("le mot de passe est valide")
-    }
-    else {
-        console.log("le mot de passe n'est pas valide")
-    }
-    
-
-}*/

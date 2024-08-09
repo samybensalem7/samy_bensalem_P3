@@ -1,8 +1,6 @@
-console.log("samy");
-
 const api = "http://localhost:5678/api";
 
-//variable globale (grand portée)
+
 let data;
 
 // on récupère les données des works
@@ -10,9 +8,8 @@ async function start() {
   const response = await fetch(api + "/works");
   data = await response.json();
   displayWorks(data);
-  //debug
 }
-
+// fonction pour l'affichage dynamique et la suppression des projets
 function displayWorks(data) {
   let gallery = document.querySelector(".gallery");
   let modalGallery = document.querySelector(".modal-gallery");
@@ -53,7 +50,6 @@ function displayWorks(data) {
         );
 
         if (response.ok) {
-          console.log("L'élément a été supprimé avec succès.");
           start();
         } else {
           console.log("Problème lors de la suppression de l'élément.");
@@ -62,7 +58,7 @@ function displayWorks(data) {
         console.log("Erreur lors de la requête DELETE:", erreur);
       }
     });
-
+    //
     corbeille.className = "btn-bin";
     binIcon.className = "fa-solid fa-trash-can";
     figureModal.className = "figure-modal-style";
@@ -82,47 +78,7 @@ function displayWorks(data) {
 }
 
 start();
-
-// récupere les works //
-
-//async function getWorks() {
-/*fetch(api + "/works")
-    .then(function (response) {
-        return response.json();  
-    })
-    .then(function (data) { */
-/*
-        const response = await fetch(api + "/works");
-        data = await response.json();
-          
-            console.log(data);
-            //on recupere recupere gallery qu'on met dans une constante 
-            const gallery = document.querySelector(".gallery");
-            for (let i in data) {
-              let work = data[i]; 
-              console.log(work);  
-              console.log(work.title);
-              console.log(work.categoryId);
-
-              let figcaption = document.createElement("figcaption");
-              figcaption.textContent = work.title;
-
-              let figure = document.createElement("figure");
-              let images = document.createElement("img");
-              
-              images.src = work.imageUrl;
-
-              figure.appendChild(images);
-              figure.appendChild(figcaption);
-              gallery.appendChild(figure);
-            
-            }
-
-        }
-
-
-getWorks();*/
-
+//récupération des categories et création de la liste deroulante pour le choix des catgeories
 async function getCategories() {
   const response = await fetch("http://localhost:5678/api/categories");
   dataCategories = await response.json();
@@ -131,9 +87,6 @@ async function getCategories() {
 
   for (let i in dataCategories) {
     let categorie = dataCategories[i];
-    console.log(categorie.name);
-    console.log(categorie.id);
-    console.log(categorie);
 
     let option = document.createElement("option");
     option.textContent = categorie.name;
@@ -150,7 +103,7 @@ getCategories();
 const filterArea = document.querySelector(".filterArea");
 
 createFilterButton("Tous");
-
+//fonction pour la création des boutons de filtrage
 function createFilterButton(categorie) {
   const filterButton = document.createElement("button");
   const textButton = document.createElement("span");
@@ -168,7 +121,7 @@ function createFilterButton(categorie) {
     setActiveCategorie(filterButton);
   });
 }
-
+// fonction pour filtrer les categories des projets
 function filterWorks(categorie, data) {
   if (categorie === "Tous") {
     displayWorks(data);
@@ -179,7 +132,7 @@ function filterWorks(categorie, data) {
     displayWorks(filteredProject);
   }
 }
-
+//changemenrt de couleur pour le bouton de la catégorie concernée
 function setActiveCategorie(activeButton) {
   const filterButtons = document.querySelectorAll(".filterArea .filter-button");
   // on recupère tout les boutons de la section filterArea pour leur supprimé la valeur active
@@ -189,42 +142,22 @@ function setActiveCategorie(activeButton) {
   activeButton.classList.add("active");
 }
 
-/*
-function stayConnected(){
-    const token = localStorage.getItem("accessToken")
-    if(token !== null){
-        editionMode.style.display = 'block';
-        modificationButton.style.display = 'block';
-        console.log("ca marche")
-    }
-    else {
-        console.log("bah ca marche pas ")
-        /* ne rien faire*/
-//   }
-//}
-
 const editionMode = document.getElementById("edition-mode");
 const modificationButton = document.querySelector(".modification-btn");
 
 let logout = document.getElementById("login");
-
-// 173
-//document.addEventListener('DOMContentLoaded', function() {
-const token = localStorage.getItem("accesToken");
-console.log(token);
-if (token !== null) {
-  editionMode.style.display = "flex";
-  modificationButton.style.display = "block";
-  console.log("C'est bon, le token est présent.");
-  logout.textContent = "logout";
-} else {
-  console.log("Pas de token trouvé.");
-}
-//});
-
+// verification du token pour savoir si l'admin est encore connecté
+  const token = localStorage.getItem("accesToken");
+  if (token !== null) {
+    editionMode.style.display = "flex";
+    modificationButton.style.display = "block";
+    logout.textContent = "logout";
+  } else {
+    console.log("aucun token trouvé.");
+  }
+//suppression du token en cas de deconnexion
 logout.addEventListener("click", function () {
   localStorage.removeItem("accesToken");
-  /* location.reload();*/
 });
 
 // ouverture et fermeture de la modale
@@ -270,8 +203,6 @@ const errorImg = document.getElementById("error-img");
 const addfile = document.querySelector(".add-file");
 const imgWork = document.getElementById("img-work");
 
-console.log("test");
-// ne fonctionne pas encore
 addfile.addEventListener("click", () => {
   imgWork.click();
 });
@@ -280,7 +211,7 @@ const photoUploadedContainer = document.getElementById(
   "photo-uploaded-container"
 );
 
-// affiche l'image en petit format
+// affiche l'image du projet en petit format
 function displayPreview() {
   imgWork.addEventListener("change", function () {
     const file = this.files[0];
@@ -296,30 +227,26 @@ function displayPreview() {
 }
 
 displayPreview();
-
+//changement de couleur pour le bouton d'ajout d'un projet
 const validatePicture = document.querySelector(".validate-picture");
 
-photoCategorie.addEventListener("change", function(event){
-  
+photoCategorie.addEventListener("change", function (event) {
   if (titre.value && photoCategorie.value && imgWork.files.length > 0) {
     validatePicture.disabled = false;
-} else {
+  } else {
     validatePicture.disabled = true;
-}
-})
+  }
+});
 
-titre.addEventListener("change", function(event){
-  
+titre.addEventListener("change", function (event) {
   if (titre.value && photoCategorie.value && imgWork.files.length > 0) {
     validatePicture.disabled = false;
-} else {
+  } else {
     validatePicture.disabled = true;
-}
-})
-
+  }
+});
+//fonction pour ajouter un projet
 function addProject() {
- 
-  console.log("bonjour");
   validePicture.addEventListener("click", async function (event) {
     event.preventDefault();
 
@@ -328,8 +255,6 @@ function addProject() {
     formData.append("title", titre.value);
     formData.append("category", photoCategorie.value);
     formData.append("image", imgWork.files[0]);
-
-    // quand il n'y a pas d'image je n'ai pas le msg d'erreur prblm à régler
 
     if (!titre.value || !photoCategorie.value || imgWork.files[0] === null) {
       errorImg.classList.remove("hidden");
@@ -345,10 +270,8 @@ function addProject() {
         });
 
         if (response.ok) {
-          console.log("projet ajouté avec succès");
           modalAjout.classList.add("hidden");
           modal.classList.add("hidden");
-          console.log("ici");
 
           start();
         } else {
